@@ -1,20 +1,22 @@
+// swift-tools-version:4.0
 import PackageDescription
 
 let package = Package(
     name: "VaporApp",
-    targets: [
-        Target(name: "App"),
-        Target(name: "Run", dependencies: ["App"]),
-    ],
     dependencies: [
-        .Package(url: "https://github.com/vapor/vapor.git", majorVersion: 2),
-        .Package(url: "https://github.com/vapor/fluent-provider.git", majorVersion: 1)
+        .package(url: "https://github.com/vapor/vapor.git", from: "2.2.2")
     ],
-    exclude: [
-        "Config",
-        "Database",
-        "Localization",
-        "Public",
-        "Resources",
+    targets: [
+        .target(name: "App", 
+            dependencies: ["Vapor"],
+            exclude: [
+                "Config",
+                "Database",
+                "Localization",
+                "Public",
+                "Resources",
+            ]
+        ),
+        .target(name: "Run", dependencies: ["App"]),
     ]
 )
